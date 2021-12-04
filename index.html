@@ -1,38 +1,41 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>DIJKSTRA</title>
-        <script src="./main.js"></script>
-        <script src="./node.js"></script>
-        <script src="./loop.js"></script>
-        <script src="./maze.js"></script>
-        <style>
-            * {
-                padding: 0;
-                margin: 0;
-            }
-            body {
-                background-color: #777777;
-            }
-            #canvas {
-                position: relative;
-                /* left: 50%;
+   <head>
+      <meta charset="UTF-8" />
+      <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <title>DIJKSTRA</title>
+      <script src="./main.js"></script>
+      <script src="./node.js"></script>
+      <script src="./loop.js"></script>
+      <script src="./maze.js"></script>
+      <style>
+         * {
+            padding: 0;
+            margin: 0;
+            font-family: 'Courier New', Courier, monospace;
+         }
+         body {
+            background-color: #777777;
+         }
+         #canvas {
+            position: relative;
+            /* left: 50%;
                 top: 50%;
                 transform: translate(-50%, -50%); */
-            }
-            #go {
-                position: relative;
-            }
-        </style>
-    </head>
-    <body>
-        <canvas id="canvas"></canvas>
-        <button id="go">go</button>
-        <script>
-            init();
-        </script>
-    </body>
+         }
+         #go {
+            position: relative;
+         }
+      </style>
+   </head>
+   <body>
+      <canvas id="canvas"></canvas>
+      <button id="go">go</button>
+      <h2 id="fract"></h2>
+      <h2 id="perc"></h2>
+      <script>
+         init();
+      </script>
+   </body>
 </html>
