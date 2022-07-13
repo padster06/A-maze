@@ -19,9 +19,6 @@ function removeWalls(current, next) {
 
 function maze(current, total) {
   // let current = nodes[0][0];
-
-  current.properties.visisted = true;
-
   document.getElementById("fract").innerHTML = `${total}/${
     (canvas.width / scale) ** 2
   }`;
@@ -30,35 +27,43 @@ function maze(current, total) {
     Math.floor((total / (canvas.width / scale) ** 2) * 100 * 100) / 100
   }%`;
 
-  let next = current.checkNeighbours(nodes);
-  // console.log(next);
-  current.properties.current = false;
+  for (
+    var itterationsBtwnDraw = 0;
+    itterationsBtwnDraw < 10;
+    itterationsBtwnDraw++
+  ) {
+    current.properties.visisted = true;
 
-  if (next) {
-    next.properties.visisted = true;
-    total++;
-    stack.push(current);
+    let next = current.checkNeighbours(nodes);
+    // console.log(next);
+    current.properties.current = false;
 
-    removeWalls(current, next);
-    current = next;
-  } else if (stack.length > 0) {
-    var node = stack.pop();
-    current = node;
-  } else {
-    endNode = nodes[nodes.length - 2][nodes[0].length - 1];
+    if (next) {
+      next.properties.visisted = true;
+      total++;
+      stack.push(current);
 
-    currNode = startNode;
-    currNodeIndex.i = i;
-    currNodeIndex.j = j;
-    startNode.dist = 0;
-    startNode.properties.start = true;
-    endNode.properties.end = true;
-    // console.log(nodes);
-    setInterval(loop, 30 / 1000);
-    findingStarted = true;
-    return;
+      removeWalls(current, next);
+      current = next;
+    } else if (stack.length > 0) {
+      var node = stack.pop();
+      current = node;
+    } else {
+      endNode = nodes[nodes.length - 2][nodes[0].length - 1];
+
+      currNode = startNode;
+      currNodeIndex.i = i;
+      currNodeIndex.j = j;
+      startNode.dist = 0;
+      startNode.properties.start = true;
+      endNode.properties.end = true;
+      // console.log(nodes);
+      setInterval(loop, 0);
+      findingStarted = true;
+      return;
+    }
+    current.properties.current = true;
   }
-  current.properties.current = true;
 
   display.fillStyle = "#fff";
   display.fillRect(0, 0, canvas.width, canvas.height);

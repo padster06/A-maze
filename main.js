@@ -57,38 +57,52 @@ function selecPathFinding(algo) {
   }
 }
 
-function getNextNode(arr) {
+function aStarNextNode(arr) {
   var smallest = Number.MAX_SAFE_INTEGER - 1;
   var curri, currj;
-  if (selectedAlgoritms.path.a) {
-    for (var i = 0; i < arr.length; i++) {
-      for (var j = 0; j < arr[i].length; j++) {
-        if (
-          arr[i][j].dist + arr[i][j].heu < smallest &&
-          arr[i][j].properties.closed == false
-        ) {
-          smallest = arr[i][j].dist + arr[i][j].heu;
-          curri = i;
-          currj = j;
-        } else {
-          // console.log(arr[i][j].dist, arr[i][j].closed);
-        }
-      }
-    }
-  } else if (selectedAlgoritms.path.dij) {
-    for (var i = 0; i < arr.length; i++) {
-      for (var j = 0; j < arr[i].length; j++) {
-        if (arr[i][j].dist < smallest && arr[i][j].properties.closed == false) {
-          smallest = arr[i][j].dist;
-          curri = i;
-          currj = j;
-        } else {
-          // console.log(arr[i][j].dist, arr[i][j].closed);
-        }
+
+  for (var i = 0; i < arr.length; i++) {
+    for (var j = 0; j < arr[i].length; j++) {
+      if (
+        arr[i][j].dist + arr[i][j].heu < smallest &&
+        arr[i][j].properties.closed == false
+      ) {
+        smallest = arr[i][j].dist + arr[i][j].heu;
+        curri = i;
+        currj = j;
+      } else {
+        // console.log(arr[i][j].dist, arr[i][j].closed);
       }
     }
   }
   return arr[curri][currj];
+}
+
+function dijkstrasNextNode(arr) {
+  console.log("dij");
+  var smallest = Number.MAX_SAFE_INTEGER - 1;
+  var curri, currj;
+  for (var i = 0; i < arr.length; i++) {
+    for (var j = 0; j < arr[i].length; j++) {
+      if (arr[i][j].dist < smallest && arr[i][j].properties.closed == false) {
+        smallest = arr[i][j].dist;
+        curri = i;
+        currj = j;
+      }
+    }
+  }
+  console.log(curri, currj, arr[curri], [currj]);
+  return arr[curri][currj];
+}
+
+function getNextNode(arr) {
+  var smallest = Number.MAX_SAFE_INTEGER - 1;
+  var curri, currj;
+  if (selectedAlgoritms.path.a) {
+    return aStarNextNode(arr);
+  } else {
+    return dijkstrasNextNode(arr);
+  }
 
   // var smallest = Number.MAX_SAFE_INTEGER - 1;
   // var curri, currj;
@@ -120,8 +134,8 @@ function init() {
   }
   canvas = document.getElementById("canvas");
   canvas.width = Math.floor(window.innerWidth / scale) * scale;
-  // canvas.height = Math.floor((window.innerHeight - 100) / scale) * scale;
-  canvas.height = scale * 20;
+  canvas.height = Math.floor((window.innerHeight - 170) / scale) * scale;
+  // canvas.height = scale * 20;
   display = canvas.getContext("2d");
   display.fillStyle = "#fff";
   display.fillRect(0, 0, canvas.width, canvas.height);
