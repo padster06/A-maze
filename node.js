@@ -112,7 +112,7 @@ class Node {
     if (this.i < nodes.length) {
       bottom = nodes[this.i + 1][this.j];
     }
-    if (this.j < nodes.length) {
+    if (this.j < nodes[this.i].length) {
       right = nodes[this.i][this.j + 1];
     }
     if (this.j > 0) {

@@ -5,7 +5,7 @@ function loop() {
 
   for (
     var itterationsBtwnDraw = 0;
-    itterationsBtwnDraw < 0;
+    itterationsBtwnDraw < 1;
     itterationsBtwnDraw++
   ) {
     if (currNode == endNode) {
